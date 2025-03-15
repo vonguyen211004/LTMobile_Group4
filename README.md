@@ -1,2 +1,2 @@
 # LTMobile_Group4
-Related files of the Mobile Programming project
+Related files about the project to build a weather forecasting application of group 4.
