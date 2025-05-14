@@ -51,23 +51,17 @@ public class CurrentWeather {
 
     public static class Weather {
         private final int id;
-        private final String main;
         private final String description;
         private final String icon;
 
-        public Weather(int id, String main, String description, String icon) {
+        public Weather(int id, String description, String icon) {
             this.id = id;
-            this.main = main;
             this.description = description;
             this.icon = icon;
         }
 
         public int getId() {
             return id;
-        }
-
-        public String getMain() {
-            return main;
         }
 
         public String getDescription() {
@@ -81,39 +75,15 @@ public class CurrentWeather {
 
     public static class Main {
         private final Double temp;
-        private final Double feelsLike;
-        private final Double tempMin;
-        private final Double tempMax;
-        private final Integer pressure;
         private final Integer humidity;
 
-        public Main(Double temp, Double feelsLike, Double tempMin, Double tempMax, Integer pressure, Integer humidity) {
+        public Main(Double temp, Integer humidity) {
             this.temp = temp;
-            this.feelsLike = feelsLike;
-            this.tempMin = tempMin;
-            this.tempMax = tempMax;
-            this.pressure = pressure;
             this.humidity = humidity;
         }
 
         public Double getTemp() {
             return temp;
-        }
-
-        public Double getFeelsLike() {
-            return feelsLike;
-        }
-
-        public Double getTempMin() {
-            return tempMin;
-        }
-
-        public Double getTempMax() {
-            return tempMax;
-        }
-
-        public Integer getPressure() {
-            return pressure;
         }
 
         public Integer getHumidity() {
@@ -123,19 +93,13 @@ public class CurrentWeather {
 
     public static class Wind {
         private final Double speed;
-        private final Integer deg;
 
-        public Wind(Double speed, Integer deg) {
+        public Wind(Double speed) {
             this.speed = speed;
-            this.deg = deg;
         }
 
         public Double getSpeed() {
             return speed;
-        }
-
-        public Integer getDeg() {
-            return deg;
         }
     }
 }

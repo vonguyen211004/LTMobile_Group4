@@ -22,12 +22,12 @@
 
             <ImageButton
                 android:id="@+id/btnBack"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/back"
                 android:src="@drawable/ic_back"
-                android:visibility="visible"
+                android:scaleType="centerInside"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -36,30 +36,15 @@
                 android:id="@+id/textViewLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_location_pin"
+                android:src="@drawable/ic_location_pin"
                 android:drawablePadding="4dp"
-                android:drawableTint="@android:color/white"
                 android:text="Hải Châu"
                 android:textColor="@android:color/white"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:id="@+id/btnSettings"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/settings"
-                android:src="@drawable/ic_settings"
-                android:visibility="visible"
-                android:layout_marginEnd="14dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.appcompat.widget.Toolbar>
@@ -104,7 +89,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:padding="30dp">
 
             <TextView
                 android:id="@+id/textViewTemperature"
@@ -147,24 +132,26 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/wind_icon"
-                        android:src="@drawable/ic_wind"
-                         />
+                        android:src="@drawable/ic_wind" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/wind_speed"
                         android:textColor="@android:color/white"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:gravity="center"/>
 
                     <TextView
                         android:id="@+id/textViewWindSpeed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="10 m/s"
+                        android:scaleType="centerInside"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:gravity="center"/>
 
                 </LinearLayout>
 
@@ -179,24 +166,26 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:contentDescription="@string/humidity_icon"
-                        android:src="@drawable/ic_humidity"
-                        />
+                        android:src="@drawable/ic_humidity" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/humidity"
                         android:textColor="@android:color/white"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:gravity="center"/>
 
                     <TextView
                         android:id="@+id/textViewHumidity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="75%"
+                        android:scaleType="centerInside"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:gravity="center"/>
 
                 </LinearLayout>
 

@@ -49,14 +49,11 @@ public class HourlyForecastAdapter extends ListAdapter<Forecast.HourlyForecast, 
         }
 
         public void bind(Forecast.HourlyForecast item) {
-            // Format time
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", new Locale("vi"));
             binding.textViewTime.setText(timeFormat.format(new Date(item.getDt() * 1000)));
 
-            // Set temperature
             binding.textViewTemperature.setText((int) item.getTemp() + "°");
 
-            // Set weather icon - Điều chỉnh kích thước biểu tượng
             int iconResourceId = WeatherUtils.getWeatherIconResource(item.getWeather().getIcon());
             Drawable resizedIcon = WeatherUtils.resizeDrawable(
                     binding.getRoot().getContext(),

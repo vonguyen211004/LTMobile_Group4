@@ -7,11 +7,8 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.IBinder;
 import android.os.Looper;
-import android.util.Log;
-
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
-
 import com.example.weatherapp1.MainActivity;
 import com.example.weatherapp1.NotificationHelper;
 import com.example.weatherapp1.R;
@@ -25,7 +22,6 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
-
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -34,7 +30,6 @@ import java.util.concurrent.TimeUnit;
 
 public class WeatherForegroundService extends Service {
 
-    private static final String TAG = "WeatherForegroundSvc";
     private FusedLocationProviderClient fusedLocationClient;
     private LocationCallback locationCallback;
     private ScheduledExecutorService scheduler;
@@ -112,7 +107,6 @@ public class WeatherForegroundService extends Service {
                     Looper.getMainLooper()
             );
         } catch (SecurityException e) {
-            Log.e(TAG, "Error requesting location updates: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -121,16 +115,11 @@ public class WeatherForegroundService extends Service {
         scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(() -> {
             try {
-                // Sử dụng phương thức với Context
                 Location location = LocationUtils.getLastKnownLocation(this, fusedLocationClient);
                 if (location != null) {
-                    Log.d(TAG, "Periodic check: Location obtained: " + location.getLatitude() + ", " + location.getLongitude());
                     checkWeatherAlerts(location);
-                } else {
-                    Log.e(TAG, "Periodic check: Could not get location");
                 }
             } catch (Exception e) {
-                Log.e(TAG, "Error in periodic weather check: " + e.getMessage());
                 e.printStackTrace();
             }
         }, 0, 3, TimeUnit.HOURS);
@@ -139,18 +128,13 @@ public class WeatherForegroundService extends Service {
     private void checkWeatherAlerts(Location location) {
         executor.execute(() -> {
             try {
-                List<WeatherAlert> alerts = NetworkUtils.getWeatherAlerts(
-                        location.getLatitude(), location.getLongitude());
+                List<WeatherAlert> alerts = NetworkUtils.getWeatherAlerts(location.getLatitude(), location.getLongitude());
 
                 if (!alerts.isEmpty()) {
-                    Log.d(TAG, "Weather alert found: " + alerts.get(0).getEvent());
                     NotificationHelper notificationHelper = new NotificationHelper(this);
                     notificationHelper.sendAlertNotification(alerts.get(0));
-                } else {
-                    Log.d(TAG, "No weather alerts found");
                 }
             } catch (Exception e) {
-                Log.e(TAG, "Error checking weather alerts: " + e.getMessage());
                 e.printStackTrace();
             }
         });

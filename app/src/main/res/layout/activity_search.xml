@@ -23,12 +23,12 @@
 
             <ImageButton
                 android:id="@+id/btnBack"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/back"
-                android:src="@drawable/ic_back"
-                android:visibility="visible"
+                android:src="@drawable/ic_back_black"
+                android:scaleType="centerInside"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +40,6 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/bg_search"
-                android:drawableStart="@drawable/ic_search"
                 android:drawablePadding="8dp"
                 android:hint="@string/search_hint"
                 android:inputType="text"
@@ -58,7 +57,8 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="@string/cancel"
-                android:layout_marginEnd="10dp"
+                android:textStyle="bold"
+                android:layout_marginEnd="16dp"
                 android:textColor="@color/blue_text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -68,30 +68,47 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/textViewUseLocation"
+    <LinearLayout
+        android:id="@+id/layoutUseLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="?attr/selectableItemBackground"
-        android:drawableStart="@drawable/ic_location"
-        android:drawablePadding="16dp"
-        android:padding="16dp"
-        android:text="@string/use_your_location"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        android:padding="8dp"
+        android:layout_marginStart="10dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <ImageView
+            android:id="@+id/imageViewLocation"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/ic_location"
+            android:layout_marginEnd="16dp" />
+
+        <TextView
+            android:id="@+id/textViewUseLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/use_your_location"
+            android:textStyle="bold"
+            android:textSize="13sp" />
+
+    </LinearLayout>
 
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/divider"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUseLocation" />
+        app:layout_constraintTop_toBottomOf="@+id/layoutUseLocation" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewResults"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"
         tools:listitem="@layout/item_search_result" />

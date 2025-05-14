@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
 
     <application
         android:name=".WeatherApp"
@@ -31,9 +32,11 @@
         <activity android:name=".WeatherActivity" />
         <activity android:name=".ForecastActivity" />
         <activity android:name=".AlertActivity" />
-        <activity android:name=".SettingsActivity" />
 
-        <service android:name=".services.WeatherForegroundService" />
+        <service
+            android:name=".services.WeatherForegroundService"
+            android:exported="false"
+            android:foregroundServiceType="location" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"

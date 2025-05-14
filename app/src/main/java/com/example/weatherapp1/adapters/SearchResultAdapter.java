@@ -1,7 +1,6 @@
 package com.example.weatherapp1.adapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.weatherapp1.databinding.ItemSearchResultBinding;
 import com.example.weatherapp1.models.SearchResult;
-import com.example.weatherapp1.utils.DrawableUtils;
 
 public class SearchResultAdapter extends ListAdapter<SearchResult, SearchResultAdapter.ViewHolder> {
 
@@ -51,9 +49,6 @@ public class SearchResultAdapter extends ListAdapter<SearchResult, SearchResultA
             super(binding.getRoot());
             this.binding = binding;
 
-            // Điều chỉnh kích thước biểu tượng vị trí
-            ImageView locationIcon = binding.imageViewLocationIcon;
-            DrawableUtils.resizeImageViewDrawable(locationIcon, 24, 24);
 
             itemView.setOnClickListener(v -> {
                 int position = getBindingAdapterPosition();

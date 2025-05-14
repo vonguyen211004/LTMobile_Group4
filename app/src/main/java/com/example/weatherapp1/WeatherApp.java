@@ -5,7 +5,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
-
 import com.google.firebase.FirebaseApp;
 
 public class WeatherApp extends Application {
@@ -16,10 +15,8 @@ public class WeatherApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // Initialize Firebase
         FirebaseApp.initializeApp(this);
 
-        // Create notification channel for Android O and above
         createNotificationChannel();
     }
 
@@ -31,9 +28,7 @@ public class WeatherApp extends Application {
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(descriptionText);
 
-            // Register the channel with the system
-            NotificationManager notificationManager =
-                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(channel);
         }
     }

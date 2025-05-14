@@ -1,11 +1,8 @@
 package com.example.weatherapp1.services;
-
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import com.example.weatherapp1.MainActivity;
@@ -20,14 +17,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        // Kiểm tra nếu thông báo chứa dữ liệu
         if (remoteMessage.getData().size() > 0) {
             String title = remoteMessage.getData().get("title");
             String body = remoteMessage.getData().get("body");
             sendNotification(title, body);
         }
 
-        // Kiểm tra nếu thông báo chứa thông báo
+
         if (remoteMessage.getNotification() != null) {
             String title = remoteMessage.getNotification().getTitle();
             String body = remoteMessage.getNotification().getBody();
@@ -38,12 +34,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(@NonNull String token) {
         super.onNewToken(token);
-        // Gửi token mới đến server của bạn
+
         sendRegistrationToServer(token);
     }
 
     private void sendRegistrationToServer(String token) {
-        // Thực hiện gửi token đến server của bạn
+
     }
 
     private void sendNotification(String title, String messageBody) {

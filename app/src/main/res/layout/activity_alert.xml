@@ -22,12 +22,12 @@
 
             <ImageButton
                 android:id="@+id/btnBack"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/back"
                 android:src="@drawable/ic_back"
-                android:visibility="visible"
+                android:scaleType="centerInside"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/weather_alert"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -115,6 +115,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Mưa lớn, dông sét, gió giật cấp 6"
                 android:textColor="@android:color/holo_red_dark"
+                android:textStyle="bold"
                 android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@+id/divider" />
 
@@ -136,8 +137,9 @@
                 android:layout_marginTop="8dp"
                 android:lineSpacingExtra="4dp"
                 android:text="• Ở trong nhà, tránh xa cửa sổ\n• Không trú dưới cây cao, cột điện\n• Rút phích cắm thiết bị điện"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/holo_red_dark"
                 android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@+id/textViewRecommendationsTitle" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

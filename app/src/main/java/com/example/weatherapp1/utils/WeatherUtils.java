@@ -3,14 +3,12 @@ package com.example.weatherapp1.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.example.weatherapp1.R;
 
-import java.util.Locale;
 
 public class WeatherUtils {
 
@@ -40,36 +38,7 @@ public class WeatherUtils {
         }
     }
 
-    public static String getWeatherConditionInVietnamese(String condition) {
-        switch (condition) {
-            case "Clear": return "QUANG ĐÃNG";
-            case "Clouds": return "NHIỀU MÂY";
-            case "Rain": return "MƯA";
-            case "Drizzle": return "MƯA PHÙN";
-            case "Thunderstorm": return "GIÔNG BÃO";
-            case "Snow": return "TUYẾT";
-            case "Mist":
-            case "Fog":
-            case "Haze": return "SƯƠNG MÙ";
-            case "Dust":
-            case "Sand": return "BỤI";
-            case "Smoke": return "KHÓI";
-            case "Tornado": return "LỐC XOÁY";
-            default: return condition.toUpperCase(Locale.forLanguageTag("vi"));
-        }
-    }
 
-    public static boolean isSevereWeather(String condition) {
-        switch (condition) {
-            case "Thunderstorm":
-            case "Tornado":
-            case "Hurricane":
-            case "Tropical Storm": return true;
-            default: return false;
-        }
-    }
-
-    // Phương thức mới để điều chỉnh kích thước biểu tượng
     public static Drawable resizeDrawable(Context context, int resourceId, int width, int height) {
         try {
             Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resourceId);
@@ -81,28 +50,9 @@ public class WeatherUtils {
         }
     }
 
-    // Phương thức mới để chuyển đổi mã thời tiết sang mô tả
-    public static String getWeatherDescription(int weatherId) {
-        if (weatherId >= 200 && weatherId < 300) {
-            return "Giông bão";
-        } else if (weatherId >= 300 && weatherId < 400) {
-            return "Mưa phùn";
-        } else if (weatherId >= 500 && weatherId < 600) {
-            return "Mưa";
-        } else if (weatherId >= 600 && weatherId < 700) {
-            return "Tuyết";
-        } else if (weatherId >= 700 && weatherId < 800) {
-            return "Sương mù";
-        } else if (weatherId == 800) {
-            return "Quang đãng";
-        } else if (weatherId > 800 && weatherId < 900) {
-            return "Nhiều mây";
-        } else {
-            return "Không xác định";
-        }
-    }
 
-    // Phương thức mới để chuyển đổi tốc độ gió sang mô tả
+
+
     public static String getWindDescription(double windSpeed) {
         if (windSpeed < 0.5) {
             return "Lặng gió";
@@ -133,7 +83,6 @@ public class WeatherUtils {
         }
     }
 
-    // Phương thức mới để chuyển đổi độ ẩm sang mô tả
     public static String getHumidityDescription(int humidity) {
         if (humidity < 30) {
             return "Khô";

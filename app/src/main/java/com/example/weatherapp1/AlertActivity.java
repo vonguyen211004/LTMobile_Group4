@@ -1,17 +1,11 @@
 package com.example.weatherapp1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import com.example.weatherapp1.databinding.ActivityAlertBinding;
-import com.example.weatherapp1.utils.DrawableUtils;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -27,22 +21,8 @@ public class AlertActivity extends AppCompatActivity {
         binding = ActivityAlertBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Điều chỉnh kích thước biểu tượng
-        DrawableUtils.resizeImageButtonDrawable(binding.btnBack, 24, 24);
-        DrawableUtils.resizeImageViewDrawable(binding.imageViewAlertIcon, 48, 48);
+        Log.d(TAG, "onCreate called");
 
-        // Đặt hình ảnh trực tiếp cho ImageButton từ tài nguyên drawable
-        binding.btnBack.setImageResource(R.drawable.ic_back);
-        // Loại bỏ tint để hiển thị màu gốc của PNG
-        binding.btnBack.setColorFilter(null);
-        // Đảm bảo ImageButton có thể nhìn thấy
-        binding.btnBack.setVisibility(View.VISIBLE);
-
-        // Điều chỉnh kích thước biểu tượng
-        ImageButton backButton = binding.btnBack;
-        DrawableUtils.resizeImageButtonDrawable(backButton, 24, 24);
-
-        // Get alert data from intent
         String alertEvent = getIntent().getStringExtra("ALERT_EVENT") != null ?
                 getIntent().getStringExtra("ALERT_EVENT") : "";
         String alertDescription = getIntent().getStringExtra("ALERT_DESCRIPTION") != null ?
@@ -52,52 +32,54 @@ public class AlertActivity extends AppCompatActivity {
 
         Log.d(TAG, "Alert event: " + alertEvent);
 
-        // Display alert information
         displayAlertInfo(alertEvent, alertDescription, alertStart, alertEnd);
 
+
         binding.btnBack.setOnClickListener(v -> {
-            onBackPressed();
+            Log.d(TAG, "onBackPressed called");
+
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intent);
+            finish();
         });
     }
 
+
     private void displayAlertInfo(String event, String description, long start, long end) {
-        // Set alert title
         binding.textViewAlertTitle.setText(event);
 
-        // Set alert time period
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm - dd/MM/yyyy", new Locale("vi"));
         Date startDate = new Date(start * 1000);
         Date endDate = new Date(end * 1000);
         binding.textViewAlertTime.setText(dateFormat.format(startDate) + " | " + dateFormat.format(endDate));
 
-        // Set alert description
         binding.textViewAlertDescription.setText(description.toUpperCase(Locale.forLanguageTag("vi")));
 
-        // Set alert icon based on event type
         setAlertIcon(event);
 
-        // Set recommendations based on alert type
         binding.textViewRecommendations.setText(getRecommendationsForAlert(event));
     }
 
     private void setAlertIcon(String alertType) {
         ImageView iconView = binding.imageViewAlertIcon;
         int iconResId;
+        alertType = alertType.toLowerCase();
 
-        if (alertType.toLowerCase().contains("rain")) {
+        if (alertType.contains("rain")) {
             iconResId = R.drawable.ic_rain;
-        } else if (alertType.toLowerCase().contains("thunderstorm")) {
+        } else if (alertType.contains("thunderstorm") || alertType.contains("storm")) {
             iconResId = R.drawable.ic_thunderstorm;
-        } else if (alertType.toLowerCase().contains("flood")) {
-            iconResId = R.drawable.ic_rain; // Sử dụng icon mưa cho lũ lụt
-        } else if (alertType.toLowerCase().contains("heat")) {
-            iconResId = R.drawable.ic_clear_day; // Sử dụng icon nắng cho nóng
-        } else if (alertType.toLowerCase().contains("fog")) {
+        } else if (alertType.contains("flood")) {
+            iconResId = R.drawable.ic_rain;
+        } else if (alertType.contains("heat")) {
+            iconResId = R.drawable.ic_clear_day;
+        } else if (alertType.contains("fog")) {
             iconResId = R.drawable.ic_fog;
-        } else if (alertType.toLowerCase().contains("snow")) {
+        } else if (alertType.contains("snow")) {
             iconResId = R.drawable.ic_snow;
-        } else if (alertType.toLowerCase().contains("tornado")) {
-            iconResId = R.drawable.ic_thunderstorm; // Sử dụng icon bão cho lốc xoáy
+        } else if (alertType.contains("tornado")) {
+            iconResId = R.drawable.ic_thunderstorm;
         } else {
             iconResId = R.drawable.ic_notification;
         }
@@ -108,7 +90,11 @@ public class AlertActivity extends AppCompatActivity {
     private String getRecommendationsForAlert(String alertType) {
         alertType = alertType.toLowerCase();
 
-        if (alertType.contains("rain") || alertType.contains("storm") || alertType.contains("thunderstorm")) {
+        if (alertType.contains("rain")) {
+            return "• Ở trong nhà khi mưa lớn\n" +
+                    "• Mang theo áo mưa khi ra ngoài\n" +
+                    "• Tránh các khu vực dễ ngập lụt";
+        } else if (alertType.contains("storm") || alertType.contains("thunderstorm")) {
             return "• Ở trong nhà, tránh xa cửa sổ\n" +
                     "• Không trú dưới cây cao, cột điện\n" +
                     "• Rút phích cắm thiết bị điện";

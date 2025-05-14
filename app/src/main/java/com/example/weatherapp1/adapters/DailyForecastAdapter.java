@@ -49,12 +49,12 @@ public class DailyForecastAdapter extends ListAdapter<Forecast.DailyForecast, Da
         }
 
         public void bind(Forecast.DailyForecast item, int position) {
-            // Format date
+
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM", new Locale("vi"));
             SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", new Locale("vi"));
             Date date = new Date(item.getDt() * 1000);
 
-            // Set day of week
+
             if (position == 0) {
                 binding.textViewDay.setText("HÔM NAY");
             } else {
@@ -62,13 +62,10 @@ public class DailyForecastAdapter extends ListAdapter<Forecast.DailyForecast, Da
                 binding.textViewDay.setText(dayName.substring(0, 1).toUpperCase() + dayName.substring(1).toUpperCase());
             }
 
-            // Set date
-            binding.textViewDate.setText(dateFormat.format(date));
 
-            // Set temperature
+            binding.textViewDate.setText(dateFormat.format(date));
             binding.textViewTemperature.setText((int) item.getTemp().getDay() + "°");
 
-            // Set weather icon - Điều chỉnh kích thước biểu tượng
             int iconResourceId = WeatherUtils.getWeatherIconResource(item.getWeather().getIcon());
             Drawable resizedIcon = WeatherUtils.resizeDrawable(
                     binding.getRoot().getContext(),
